@@ -35,11 +35,11 @@ namespace WebApplication1.Controllers
             .ToArray();
         }
 
-        [HttpGet("file/mhash/{multihash:required}/page/{pageOffset:required}")]
+        [HttpGet("file/mhash/{multihash:required}/page/{pageOffset}")]
         public IActionResult GetFile(
             [FromRoute] string multihash,
             [SegmentPrefix] string pageOffset,
-            [MatrixParameter("content-type")] string contentType)
+            [MatrixParameter("{pageOffset}", Name = "content-type")] string contentType)
         {
             return Ok(string.Join("//", multihash, pageOffset, contentType));
         }

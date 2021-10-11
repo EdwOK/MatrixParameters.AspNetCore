@@ -38,6 +38,7 @@ namespace WebApplication1
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });
                 c.ParameterFilter<MatrixParameterFilter>();
+                c.DocumentFilter<MatrixDocumentFilter>();
             });
         }
 
