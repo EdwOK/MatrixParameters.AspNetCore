@@ -41,7 +41,7 @@ namespace WebApplication1.Controllers
             [SegmentPrefix] string pageOffset,
             [MatrixParameter("{pageOffset}", Name = "content-type")] string contentType)
         {
-            return Ok(string.Join("//", multihash, pageOffset, contentType));
+            return Ok(string.Join("/", multihash, pageOffset, contentType));
         }
 
         [HttpPut]

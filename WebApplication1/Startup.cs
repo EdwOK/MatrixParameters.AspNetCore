@@ -18,12 +18,8 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options =>
-            {
-                //options.ModelBinderProviders.Insert(0, new MatrixParameterModelBinderProvider());
-                //options.ModelBinderProviders.Insert(1, new SegmentParameterModelBinderProvider());
-            });
-
+            services.AddControllers();
+            
             services
                 .Configure<KestrelServerOptions>(options =>
                 {
@@ -36,7 +32,11 @@ namespace WebApplication1
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo 
+                { 
+                    Title = "WebApplication1",
+                    Version = "v1"
+                });
                 c.ParameterFilter<MatrixParameterFilter>();
                 c.DocumentFilter<MatrixDocumentFilter>();
             });
