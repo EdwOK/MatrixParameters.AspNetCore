@@ -13,18 +13,17 @@ namespace WebApplication1
 
             foreach (var path in swaggerDoc.Paths)
             {
-                var paramsToChange = new List<string>();
+                var parametersToChange = new List<OpenApiParameter>();
                 foreach (var openApiOperation in path.Value.Operations.Values)
                 {
                     var matrixParameters = openApiOperation.Parameters
-                        .Where(p => p.Style == ParameterStyle.Matrix)
-                        .Select(p => p.Name);
-                    paramsToChange.AddRange(matrixParameters);
+                        .Where(p => p.Style == ParameterStyle.Matrix);
+                    parametersToChange.AddRange(matrixParameters);
                 }
 
-                if (paramsToChange.Any())
+                if (parametersToChange.Any())
                 {
-                    var parametersPathKey = string.Join("", paramsToChange.Select(p => $"{{{p}}}"));
+                    var parametersPathKey = string.Join("", parametersToChange.Select(p => $"{{{p.Name}}}"));
                     newPaths.Add($"{path.Key}{parametersPathKey}", path.Value);
                 }
                 else
