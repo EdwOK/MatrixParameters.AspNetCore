@@ -32,7 +32,7 @@ namespace WebApplication1
                 var convertedValues = values.Select(x => valueConverter.ConvertFromInvariantString(x)).ToArray();
                 
                 var resultValues = Array.CreateInstance(elementType, convertedValues.Length);
-                Array.Copy(values, resultValues, values.Length);
+                Array.Copy(convertedValues, resultValues, convertedValues.Length);
                 
                 bindingContext.Result = ModelBindingResult.Success(resultValues);
             }
