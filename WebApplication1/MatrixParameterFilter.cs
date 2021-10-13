@@ -13,7 +13,10 @@ namespace WebApplication1
                 return;
             }
 
-            if (context.ParameterInfo.CustomAttributes.Any(a => a.AttributeType == typeof(MatrixParameterAttribute)))
+            var isAnyMatrixParams =
+                context.ParameterInfo?.CustomAttributes.Any(a => a.AttributeType == typeof(MatrixParameterAttribute));
+            
+            if (isAnyMatrixParams.GetValueOrDefault())
             {
                 parameter.Style = ParameterStyle.Matrix;
             }

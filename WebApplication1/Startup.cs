@@ -23,6 +23,11 @@ namespace WebApplication1
                 options.ModelBinderProviders.Insert(0, new SegmentPrefixAttributeModelBinderProvider());
                 options.ModelBinderProviders.Insert(1, new MatrixParameterAttributeModelBinderProvider());
             });
+
+            services.AddRouting(options =>
+            {
+                options.ConstraintMap.Add("SegmentPrefix", typeof(SegmentPrefixConstraint));
+            });
             
             services
                 .Configure<KestrelServerOptions>(options =>

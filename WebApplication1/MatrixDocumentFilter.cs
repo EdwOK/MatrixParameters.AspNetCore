@@ -35,28 +35,26 @@ namespace WebApplication1
 
                 foreach (var (openApiOperation, parameters) in openApiParametersToChange)
                 {
-                    foreach (var parameter in parameters)
+                    var parameterPaths = parameters.Aggregate(path.Key, (current, parameter) => current + $"{{{parameter.Name}}}");
+                    
+                    if (newPaths.TryGetValue(parameterPaths, out var newPath))
                     {
-                        var newPathKey = $"{path.Key}{{{parameter.Name}}}";
-                        if (newPaths.TryGetValue(newPathKey, out var newPath))
+                        newPath.Operations.TryAdd(openApiOperation.Key, openApiOperation.Value);
+                    }
+                    else
+                    {
+                        newPaths.Add(parameterPaths, new OpenApiPathItem
                         {
-                            newPath.Operations.TryAdd(openApiOperation.Key, openApiOperation.Value);
-                        }
-                        else
-                        {
-                            newPaths.Add(newPathKey, new OpenApiPathItem
+                            Extensions = path.Value.Extensions,
+                            Parameters = path.Value.Parameters,
+                            Servers = path.Value.Servers,
+                            Summary = path.Value.Summary,
+                            Operations = new Dictionary<OperationType, OpenApiOperation>
                             {
-                                Extensions = path.Value.Extensions,
-                                Parameters = path.Value.Parameters,
-                                Servers = path.Value.Servers,
-                                Summary = path.Value.Summary,
-                                Operations = new Dictionary<OperationType, OpenApiOperation>
-                                {
-                                    { openApiOperation.Key, openApiOperation.Value }
-                                },
-                                Description = path.Value.Description,
-                            });
-                        }
+                                { openApiOperation.Key, openApiOperation.Value }
+                            },
+                            Description = path.Value.Description,
+                        });
                     }
                 }
             }

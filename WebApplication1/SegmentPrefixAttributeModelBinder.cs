@@ -8,7 +8,7 @@ namespace WebApplication1
 {
     public class SegmentPrefixAttributeModelBinderProvider : IModelBinderProvider
     {
-        public IModelBinder GetBinder(ModelBinderProviderContext context)
+        public IModelBinder? GetBinder(ModelBinderProviderContext context)
         {
             if (context is null)
             {

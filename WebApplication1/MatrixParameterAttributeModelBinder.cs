@@ -10,7 +10,7 @@ namespace WebApplication1
 {
     public class MatrixParameterAttributeModelBinderProvider : IModelBinderProvider
     {
-        public IModelBinder GetBinder(ModelBinderProviderContext context)
+        public IModelBinder? GetBinder(ModelBinderProviderContext context)
         {
             if (context is null)
             {
@@ -71,8 +71,7 @@ namespace WebApplication1
                 var attributeValues = GetAttributeValues(matrixParamSegment, modelName);
                 if (attributeValues is not null)
                 {
-                    bindingContext.SetResult(
-                        attributeValues.Count == 1 ? attributeValues[0] : attributeValues.ToArray());
+                    bindingContext.SetResult(attributeValues.ToArray());
                 }
 
                 return Task.CompletedTask;
@@ -98,19 +97,17 @@ namespace WebApplication1
                     continue;
                 }
 
-                var attributeValues = GetAttributeValues(paramSegment, segmentAttributeName!);
-                if (attributeValues != null)
+                var attributeValues = GetAttributeValues(paramSegment, modelName);
+                if (attributeValues is not null)
                 {
                     collectedAttributeValues.AddRange(attributeValues);
                 }
             }
-
-            bindingContext.SetResult(collectedAttributeValues.Count == 1
-                ? collectedAttributeValues[0]
-                : collectedAttributeValues.ToArray());
+            
+            bindingContext.SetResult(collectedAttributeValues.ToArray());
             return Task.CompletedTask;
 
-            static IList<string> GetAttributeValues(string matrixParamSegment, string attributeName)
+            static IList<string>? GetAttributeValues(string matrixParamSegment, string attributeName)
             {
                 var valuesCollection = HttpUtility.ParseQueryString(matrixParamSegment.Replace(";", "&"));
                 var attributeValueList = valuesCollection.Get(attributeName);
