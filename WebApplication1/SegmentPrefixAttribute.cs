@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApplication1
 {
@@ -17,42 +15,7 @@ namespace WebApplication1
     /// </example>
     public class SegmentPrefixAttribute : ModelBinderAttribute
     {
-        public SegmentPrefixAttribute() : base(typeof(SegmentPrefixAttributeModelBinder))
-        {
-        }
-
         /// <inheritdoc />
         public override BindingSource BindingSource => BindingSource.Path;
-    }
-
-    public class SegmentPrefixAttributeModelBinder : IModelBinder
-    {
-        public Task BindModelAsync(ModelBindingContext bindingContext)
-        {
-            if (bindingContext is null)
-            {
-                throw new ArgumentNullException(nameof(bindingContext));
-            }
-
-            var segmentName = bindingContext.ModelName;
-            var segmentResult = bindingContext.ValueProvider.GetValue(segmentName);
-            if (segmentResult == ValueProviderResult.None)
-            {
-                return Task.CompletedTask;
-            }
-
-            bindingContext.ModelState.SetModelValue(segmentName, segmentResult);
-
-            var segmentValue = segmentResult.FirstValue;
-            if (segmentValue is null)
-            {
-                return Task.CompletedTask;
-            }
-
-            bindingContext.Model = segmentValue.Split(new[] { ";" }, 2, StringSplitOptions.None).First();
-            bindingContext.Result = ModelBindingResult.Success(bindingContext.Model);
-
-            return Task.CompletedTask;
-        }
     }
 }

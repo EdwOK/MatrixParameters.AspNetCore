@@ -13,27 +13,55 @@ namespace WebApplication1
 
             foreach (var path in swaggerDoc.Paths)
             {
-                var parametersToChange = new List<OpenApiParameter>();
-                foreach (var openApiOperation in path.Value.Operations.Values)
+                var openApiParametersToChange =
+                    new Dictionary<KeyValuePair<OperationType, OpenApiOperation>, IEnumerable<OpenApiParameter>>();
+
+                foreach (var openApiOperation in path.Value.Operations)
                 {
-                    var matrixParameters = openApiOperation.Parameters
-                        .Where(p => p.Style == ParameterStyle.Matrix);
-                    parametersToChange.AddRange(matrixParameters);
+                    var matrixParameters = openApiOperation.Value.Parameters
+                        .Where(p => p.Style == ParameterStyle.Matrix)
+                        .ToArray();
+                    if (matrixParameters.Length > 0)
+                    {
+                        openApiParametersToChange.Add(openApiOperation, matrixParameters);
+                    }
                 }
 
-                if (parametersToChange.Any())
-                {
-                    var parametersPathKey = string.Join("", parametersToChange.Select(p => $"{{{p.Name}}}"));
-                    newPaths.Add($"{path.Key}{parametersPathKey}", path.Value);
-                }
-                else
+                if (openApiParametersToChange.Count == 0)
                 {
                     newPaths.Add(path.Key, path.Value);
+                    continue;
+                }
+
+                foreach (var (openApiOperation, parameters) in openApiParametersToChange)
+                {
+                    foreach (var parameter in parameters)
+                    {
+                        var newPathKey = $"{path.Key}{{{parameter.Name}}}";
+                        if (newPaths.TryGetValue(newPathKey, out var newPath))
+                        {
+                            newPath.Operations.TryAdd(openApiOperation.Key, openApiOperation.Value);
+                        }
+                        else
+                        {
+                            newPaths.Add(newPathKey, new OpenApiPathItem
+                            {
+                                Extensions = path.Value.Extensions,
+                                Parameters = path.Value.Parameters,
+                                Servers = path.Value.Servers,
+                                Summary = path.Value.Summary,
+                                Operations = new Dictionary<OperationType, OpenApiOperation>
+                                {
+                                    { openApiOperation.Key, openApiOperation.Value }
+                                },
+                                Description = path.Value.Description,
+                            });
+                        }
+                    }
                 }
             }
 
             swaggerDoc.Paths.Clear();
-
             foreach (var path in newPaths)
             {
                 swaggerDoc.Paths.Add(path.Key, path.Value);

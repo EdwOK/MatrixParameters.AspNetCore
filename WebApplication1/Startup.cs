@@ -18,7 +18,11 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new SegmentPrefixAttributeModelBinderProvider());
+                options.ModelBinderProviders.Insert(1, new MatrixParameterAttributeModelBinderProvider());
+            });
             
             services
                 .Configure<KestrelServerOptions>(options =>

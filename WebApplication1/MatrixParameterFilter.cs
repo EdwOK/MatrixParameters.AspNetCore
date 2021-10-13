@@ -8,14 +8,12 @@ namespace WebApplication1
     {
         public void Apply(OpenApiParameter parameter, ParameterFilterContext context)
         {
-            if (!parameter.In.HasValue || parameter.In.Value != ParameterLocation.Path)
+            if (parameter.In is not ParameterLocation.Path)
             {
                 return;
             }
 
-            var isMatrixParameter = context.ParameterInfo?.CustomAttributes
-                ?.Any(a => a.AttributeType == typeof(MatrixParameterAttribute));
-            if (isMatrixParameter.GetValueOrDefault(false))
+            if (context.ParameterInfo.CustomAttributes.Any(a => a.AttributeType == typeof(MatrixParameterAttribute)))
             {
                 parameter.Style = ParameterStyle.Matrix;
             }
