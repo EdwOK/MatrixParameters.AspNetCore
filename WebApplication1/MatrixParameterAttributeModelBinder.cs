@@ -70,7 +70,7 @@ namespace WebApplication1
                 var attributeValues = GetAttributeValues(matrixParamSegment, modelName);
                 if (attributeValues is not null)
                 {
-                    bindingContext.Result = bindingContext.CreateResult(attributeValues.ToArray());
+                    bindingContext.Result = bindingContext.CreateResult(attributeValues);
                 }
 
                 return Task.CompletedTask;
@@ -103,7 +103,7 @@ namespace WebApplication1
                 }
             }
             
-            bindingContext.Result = bindingContext.CreateResult(collectedAttributeValues.ToArray());
+            bindingContext.Result = bindingContext.CreateResult(collectedAttributeValues);
             return Task.CompletedTask;
 
             static IList<string>? GetAttributeValues(string matrixParamSegment, string attributeName)

@@ -8,14 +8,25 @@ namespace WebApplication1
 {
     internal static class ModelBinderExtensions
     {
-        public static ModelBindingResult CreateResult(this ModelBindingContext bindingContext, params string[] values)
+        public static ModelBindingResult CreateResult(this ModelBindingContext bindingContext, IEnumerable<string>? values)
         {
-            if (!bindingContext.ModelType.IsArray)
+            if (values is null)
             {
-                return ConvertValue(bindingContext, values[0]);
+                return new ModelBindingResult();
             }
 
-            return ConvertArrayValue(bindingContext, values);
+            if (bindingContext.ModelType.IsArray)
+            {
+                return ConvertArrayValue(bindingContext, values);
+            }
+            
+            var value = values.FirstOrDefault();
+            if (value is null)
+            {
+                return new ModelBindingResult();
+            }
+                
+            return ConvertValue(bindingContext, value);
         }
 
         private static ModelBindingResult ConvertArrayValue(ModelBindingContext bindingContext, IEnumerable<string> values)
@@ -33,7 +44,8 @@ namespace WebApplication1
         private static ModelBindingResult ConvertValue(ModelBindingContext bindingContext, string value)
         {
             var valueConverter = TypeDescriptor.GetConverter(bindingContext.ModelType);
-            return ModelBindingResult.Success(valueConverter.ConvertFromInvariantString(value));
+            var resultValue = valueConverter.ConvertFromInvariantString(value);
+            return ModelBindingResult.Success(resultValue);
         }
     }
 }
