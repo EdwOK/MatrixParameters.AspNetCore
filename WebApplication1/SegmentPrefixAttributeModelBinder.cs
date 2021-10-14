@@ -53,7 +53,7 @@ namespace WebApplication1
             }
 
             var value = segmentValue.Split(new[] { ";" }, 2, StringSplitOptions.None).First();
-            bindingContext.SetResult(value);
+            bindingContext.Result = bindingContext.CreateResult(value);
 
             return Task.CompletedTask;
         }

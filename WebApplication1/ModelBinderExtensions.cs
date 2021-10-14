@@ -8,39 +8,32 @@ namespace WebApplication1
 {
     internal static class ModelBinderExtensions
     {
-        public static void SetResult(this ModelBindingContext bindingContext, string value)
+        public static ModelBindingResult CreateResult(this ModelBindingContext bindingContext, params string[] values)
         {
-            try
+            if (!bindingContext.ModelType.IsArray)
             {
-                var valueConverter = TypeDescriptor.GetConverter(bindingContext.ModelType);
-                bindingContext.Result = ModelBindingResult.Success(valueConverter.ConvertFromInvariantString(value));
+                return ConvertValue(bindingContext, values[0]);
             }
-            catch (Exception exc)
-            {
-                bindingContext.ModelState.TryAddModelError(bindingContext.ModelName, exc.Message);
-                bindingContext.Result = ModelBindingResult.Failed();
-            }
+
+            return ConvertArrayValue(bindingContext, values);
         }
-        
-        public static void SetResult(this ModelBindingContext bindingContext, string[] values)
+
+        private static ModelBindingResult ConvertArrayValue(ModelBindingContext bindingContext, IEnumerable<string> values)
         {
-            try
-            {
-                var elementType = bindingContext.ModelType.GetElementType() ?? bindingContext.ModelType;
-                
-                var valueConverter = TypeDescriptor.GetConverter(elementType);
-                var convertedValues = values.Select(x => valueConverter.ConvertFromInvariantString(x)).ToArray();
-                
-                var resultValues = Array.CreateInstance(elementType, convertedValues.Length);
-                Array.Copy(convertedValues, resultValues, convertedValues.Length);
-                
-                bindingContext.Result = ModelBindingResult.Success(resultValues);
-            }
-            catch (Exception exc)
-            {
-                bindingContext.ModelState.TryAddModelError(bindingContext.ModelName, exc.Message);
-                bindingContext.Result = ModelBindingResult.Failed();
-            }
+            var valueType = bindingContext.ModelType.GetElementType() ?? bindingContext.ModelType;
+            var valueConverter = TypeDescriptor.GetConverter(valueType);
+            
+            var convertedValues = values.Select(v => valueConverter.ConvertFromInvariantString(v)).ToArray();
+            var resultValues = Array.CreateInstance(valueType, convertedValues.Length);
+            Array.Copy(convertedValues, resultValues, convertedValues.Length);
+
+            return ModelBindingResult.Success(resultValues);
+        }
+
+        private static ModelBindingResult ConvertValue(ModelBindingContext bindingContext, string value)
+        {
+            var valueConverter = TypeDescriptor.GetConverter(bindingContext.ModelType);
+            return ModelBindingResult.Success(valueConverter.ConvertFromInvariantString(value));
         }
     }
 }

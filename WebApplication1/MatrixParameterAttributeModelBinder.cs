@@ -28,16 +28,16 @@ namespace WebApplication1
                 return null;
             }
 
-            return new MatrixParameterAttributeModelBinder(attribute);
+            return new MatrixParameterAttributeModelBinder(attribute.Segment);
         }
     }
     
     public class MatrixParameterAttributeModelBinder : IModelBinder
     {
-        private readonly MatrixParameterAttribute _matrixParameterAttribute;
+        private readonly string? _attributeSegment;
 
-        public MatrixParameterAttributeModelBinder(MatrixParameterAttribute matrixParameterAttribute) =>
-            _matrixParameterAttribute = matrixParameterAttribute;
+        public MatrixParameterAttributeModelBinder(string? segment) =>
+            _attributeSegment = segment;
 
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
@@ -45,16 +45,15 @@ namespace WebApplication1
             {
                 throw new ArgumentNullException(nameof(bindingContext));
             }
-
-            var segmentAttributeName = _matrixParameterAttribute.Segment;
+            
             var modelName = bindingContext.OriginalModelName;
 
             // Match the route segment like [Route("{fruits}")] if possible.
-            if (!string.IsNullOrEmpty(segmentAttributeName)
-                && segmentAttributeName.StartsWith("{", StringComparison.Ordinal)
-                && segmentAttributeName.EndsWith("}", StringComparison.Ordinal))
+            if (!string.IsNullOrEmpty(_attributeSegment)
+                && _attributeSegment.StartsWith("{", StringComparison.Ordinal)
+                && _attributeSegment.EndsWith("}", StringComparison.Ordinal))
             {
-                var segmentName = segmentAttributeName.Substring(1, segmentAttributeName.Length - 2);
+                var segmentName = _attributeSegment.Substring(1, _attributeSegment.Length - 2);
 
                 var segmentResult = bindingContext.ValueProvider.GetValue(segmentName);
                 if (segmentResult == ValueProviderResult.None)
@@ -71,7 +70,7 @@ namespace WebApplication1
                 var attributeValues = GetAttributeValues(matrixParamSegment, modelName);
                 if (attributeValues is not null)
                 {
-                    bindingContext.SetResult(attributeValues.ToArray());
+                    bindingContext.Result = bindingContext.CreateResult(attributeValues.ToArray());
                 }
 
                 return Task.CompletedTask;
@@ -89,10 +88,10 @@ namespace WebApplication1
             var collectedAttributeValues = new List<string>();
             foreach (var paramSegment in paramSegments)
             {
-                // If no parameter is specified, as [MatrixParam], get values from all the segments.
-                // If a segment prefix is specified like [MatrixParam("apples")], get values only it is matched.
-                if (!string.IsNullOrEmpty(segmentAttributeName)
-                    && !paramSegment.StartsWith($"{segmentAttributeName};", StringComparison.OrdinalIgnoreCase))
+                // If no parameter is specified, as [MatrixParameter], get values from all the segments.
+                // If a segment prefix is specified like [MatrixParameter("apples")], get values only it is matched.
+                if (!string.IsNullOrEmpty(_attributeSegment)
+                    && !paramSegment.StartsWith($"{_attributeSegment};", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
@@ -104,12 +103,12 @@ namespace WebApplication1
                 }
             }
             
-            bindingContext.SetResult(collectedAttributeValues.ToArray());
+            bindingContext.Result = bindingContext.CreateResult(collectedAttributeValues.ToArray());
             return Task.CompletedTask;
 
             static IList<string>? GetAttributeValues(string matrixParamSegment, string attributeName)
             {
-                var valuesCollection = HttpUtility.ParseQueryString(matrixParamSegment.Replace(";", "&"));
+                var valuesCollection = HttpUtility.ParseQueryString(matrixParamSegment.Replace(";", "&").Replace("+", "%2B"));
                 var attributeValueList = valuesCollection.Get(attributeName);
                 return attributeValueList?.Split(',');
             }

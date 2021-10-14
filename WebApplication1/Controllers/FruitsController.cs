@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace WebApplication1.Controllers
 {
@@ -94,6 +95,6 @@ namespace WebApplication1.Controllers
             return Ok(result);
         }
 
-        private static string Join(string[] array) => array == null ? string.Empty : string.Join(",", array);
+        private static string Join(string[] array) => string.Join(",", array);
     }
 }

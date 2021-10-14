@@ -10,7 +10,8 @@ namespace WebApplication1
     /// <summary>
     /// Used to bind matrix parameter values from the URI.
     /// </summary>
-    public class MatrixParameterAttribute : ModelBinderAttribute
+    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public class MatrixParameterAttribute : Attribute, IBindingSourceMetadata, IModelNameProvider
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MatrixParameterAttribute"/> class.
@@ -41,11 +42,14 @@ namespace WebApplication1
         /// with "oranges" like .../oranges;color=red/...
         /// <c>[MatrixParam("{fruits}")] string[] color</c> will match color only from the route .../{fruits}/...
         /// </example>
-        public MatrixParameterAttribute(string segment, bool required = false) 
-            : base(typeof(MatrixParameterAttributeModelBinder)) => (Segment, Required) = (segment, required);
+        public MatrixParameterAttribute(string? segment, bool required = false) 
+            => (Segment, Required) = (segment, required);
 
         /// <inheritdoc />
-        public override BindingSource BindingSource => BindingSource.Path;
+        public BindingSource BindingSource => BindingSource.Path;
+        
+        /// <inheritdoc />
+        public string? Name { get; set; }
 
         /// <summary>
         /// Can be empty, a target prefix value, or a route parameter name embedded in "{" and "}".
@@ -56,11 +60,11 @@ namespace WebApplication1
         /// with "oranges" like .../oranges;color=red/...
         /// <c>[MatrixParameter("{fruits}")] string[] color</c> will match color only from the route .../{fruits}/...
         /// </example>
-        public string Segment { get; }
+        public string? Segment { get; set; }
 
         /// <summary>
         /// Indicates that parameter is required for model binding.
         /// </summary>
-        public bool Required { get; }
+        public bool Required { get; set; }
     }
 }

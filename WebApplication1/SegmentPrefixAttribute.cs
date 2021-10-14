@@ -13,9 +13,13 @@ namespace WebApplication1
     /// <c>[SegmentPrefix] string fruits</c> will have fruits = apples
     /// but <c>string location</c> without this attribute will have location = washington;rate=good.
     /// </example>
-    public class SegmentPrefixAttribute : ModelBinderAttribute
+    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public class SegmentPrefixAttribute : Attribute, IBindingSourceMetadata, IModelNameProvider
     {
         /// <inheritdoc />
-        public override BindingSource BindingSource => BindingSource.Path;
+        public BindingSource BindingSource => BindingSource.Path;
+
+        /// <inheritdoc />
+        public string? Name { get; set; }
     }
 }
