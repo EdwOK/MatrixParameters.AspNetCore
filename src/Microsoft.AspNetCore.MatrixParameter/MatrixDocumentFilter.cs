@@ -1,9 +1,9 @@
-﻿using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace WebApplication1
+namespace Microsoft.AspNetCore.MatrixParameter
 {
     public class MatrixDocumentFilter : IDocumentFilter
     {
@@ -86,6 +86,7 @@ namespace WebApplication1
             foreach (var path in newPaths)
             {
                 swaggerDoc.Paths.Add(path.Key, path.Value);
-            }        }
+            }
+        }
     }
 }

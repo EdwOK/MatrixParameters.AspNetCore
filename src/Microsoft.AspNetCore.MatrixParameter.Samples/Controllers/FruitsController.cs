@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.WebEncoders.Testing;
 
-namespace WebApplication1.Controllers
+namespace Microsoft.AspNetCore.MatrixParameter.Samples.Controllers
 {
     [ApiController]
     [Route("customers/{customerId}")]

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-namespace WebApplication1
+namespace Microsoft.AspNetCore.MatrixParameter
 {
     public class SegmentPrefixAttributeModelBinderProvider : IModelBinderProvider
     {

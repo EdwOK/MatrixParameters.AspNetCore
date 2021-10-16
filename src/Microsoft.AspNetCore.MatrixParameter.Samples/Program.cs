@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace WebApplication1
+namespace Microsoft.AspNetCore.MatrixParameter.Samples
 {
     public class Program
     {

@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace WebApplication1
+namespace Microsoft.AspNetCore.MatrixParameter
 {
     internal static class ModelBinderExtensions
     {
@@ -14,19 +15,44 @@ namespace WebApplication1
             {
                 return new ModelBindingResult();
             }
-
-            if (bindingContext.ModelType.IsArray)
-            {
-                return ConvertArrayValue(bindingContext, values);
-            }
             
-            var value = values.FirstOrDefault();
-            if (value is null)
+            try
             {
-                return new ModelBindingResult();
-            }
+                if (bindingContext.ModelType.IsArray)
+                {
+                    return ConvertArrayValue(bindingContext, values);
+                }
+            
+                var value = values.FirstOrDefault();
+                if (value is null)
+                {
+                    return new ModelBindingResult();
+                }
                 
-            return ConvertValue(bindingContext, value);
+                return ConvertValue(bindingContext, value);
+            }
+            catch (Exception exc)
+            {
+                AddModelError(bindingContext, bindingContext.ModelName, exc);
+                return ModelBindingResult.Failed();
+            }
+        }
+
+        private static void AddModelError(ModelBindingContext bindingContext, string modelName, Exception exc)
+        {
+            var targetInvocationException = exc as TargetInvocationException;
+            if (targetInvocationException?.InnerException != null)
+            {
+                exc = targetInvocationException.InnerException;
+            }
+
+            // Don't add an error message if a binding error has already occurred for this property.
+            var modelState = bindingContext.ModelState;
+            var validationState = modelState.GetFieldValidationState(modelName);
+            if (validationState == ModelValidationState.Unvalidated)
+            {
+                modelState.AddModelError(modelName, exc, bindingContext.ModelMetadata);
+            }
         }
 
         private static ModelBindingResult ConvertArrayValue(ModelBindingContext bindingContext, IEnumerable<string> values)
@@ -37,7 +63,6 @@ namespace WebApplication1
             var convertedValues = values.Select(v => valueConverter.ConvertFromInvariantString(v)).ToArray();
             var resultValues = Array.CreateInstance(valueType, convertedValues.Length);
             Array.Copy(convertedValues, resultValues, convertedValues.Length);
-
             return ModelBindingResult.Success(resultValues);
         }
 

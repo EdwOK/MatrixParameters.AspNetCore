@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 
-namespace WebApplication1
+namespace Microsoft.AspNetCore.MatrixParameter
 {
     /// <summary>
     /// Used to bind the segment prefix value from the route.

@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
+﻿using System;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-namespace WebApplication1
+namespace Microsoft.AspNetCore.MatrixParameter
 {
     /// <summary>
     /// Used to bind matrix parameter values from the URI.

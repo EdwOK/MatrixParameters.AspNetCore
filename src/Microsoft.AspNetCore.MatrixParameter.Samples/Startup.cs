@@ -1,13 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace WebApplication1
+namespace Microsoft.AspNetCore.MatrixParameter.Samples
 {
     public class Startup
     {
@@ -28,16 +26,6 @@ namespace WebApplication1
             {
                 options.ConstraintMap.Add("SegmentPrefix", typeof(SegmentPrefixConstraint));
             });
-            
-            services
-                .Configure<KestrelServerOptions>(options =>
-                {
-                    options.Limits.MaxRequestBodySize = Limits.RequestFileSizeLimit;
-                })
-                .Configure<FormOptions>(x =>
-                {
-                    x.MultipartBodyLengthLimit = Limits.MultipartBodySizeLimit;
-                });
 
             services.AddSwaggerGen(c =>
             {
