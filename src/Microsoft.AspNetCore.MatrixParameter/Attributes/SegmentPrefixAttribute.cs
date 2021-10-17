@@ -1,7 +1,8 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Microsoft.AspNetCore.MatrixParameter
+namespace Microsoft.AspNetCore.MatrixParameter.Attributes
 {
     /// <summary>
     /// Used to bind the segment prefix value from the route.
@@ -12,13 +13,7 @@ namespace Microsoft.AspNetCore.MatrixParameter
     /// <c>[SegmentPrefix] string fruits</c> will have fruits = apples
     /// but <c>string location</c> without this attribute will have location = washington;rate=good.
     /// </example>
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public class SegmentPrefixAttribute : Attribute, IBindingSourceMetadata, IModelNameProvider
+    public class SegmentPrefixAttribute : FromRouteAttribute
     {
-        /// <inheritdoc />
-        public BindingSource BindingSource => BindingSource.Path;
-
-        /// <inheritdoc />
-        public string? Name { get; set; }
     }
 }

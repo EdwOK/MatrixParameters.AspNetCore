@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.AspNetCore.MatrixParameter.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.AspNetCore.MatrixParameter.Samples.Controllers
@@ -41,8 +42,7 @@ namespace Microsoft.AspNetCore.MatrixParameter.Samples.Controllers
         public IActionResult GetApplesFromWashington(
             long customerId, // The customer's id from the route segment {customerId} of the URI.
             [MatrixParameter] string[] color, // The matrix parameter color from any path segment of the URI.
-            [MatrixParameter("apples")]
-            string[] rate) //The matrix parameter rate from the path segment starting with "apples" of the URI.
+            [MatrixParameter("apples")] string[] rate) //The matrix parameter rate from the path segment starting with "apples" of the URI.
         {
             var result = new Dictionary<string, string>
             {
@@ -63,8 +63,7 @@ namespace Microsoft.AspNetCore.MatrixParameter.Samples.Controllers
             long customerId, // The customer's id from the route segment {customerId}.
             [SegmentPrefix] string location, // The segment prefix location from the route segment {location}.
             [MatrixParameter] string[] color, // The matrix parameter color from any path segment of the URI.
-            [MatrixParameter("{location}")]
-            string[] rate) //The matrix parameter rate from the route segment {location}.
+            [MatrixParameter("{location}")] string[] rate) //The matrix parameter rate from the route segment {location}.
         {
             var result = new Dictionary<string, string>
             {
@@ -83,8 +82,7 @@ namespace Microsoft.AspNetCore.MatrixParameter.Samples.Controllers
         [Route("optional/{*OptionalSubPath}")]
         public IActionResult GetAttributesFromOptionalSegments(
             [MatrixParameter] string[] color, // The color from any path segment of the URI.
-            [MatrixParameter("apples")]
-            string[] rate) // The rate from a path segment starting with the prefix "apples".
+            [MatrixParameter("apples")] string[] rate) // The rate from a path segment starting with the prefix "apples".
         {
             var result = new Dictionary<string, string>
             {

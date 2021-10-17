@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Microsoft.AspNetCore.MatrixParameter
+namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders
 {
     internal static class ModelBinderExtensions
     {
@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.MatrixParameter
         {
             if (values is null)
             {
-                return new ModelBindingResult();
+                return ModelBindingResult.Failed();
             }
             
             try
@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.MatrixParameter
                 var value = values.FirstOrDefault();
                 if (value is null)
                 {
-                    return new ModelBindingResult();
+                    return ModelBindingResult.Failed();
                 }
                 
                 return ConvertValue(bindingContext, value);

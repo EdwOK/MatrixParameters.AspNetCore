@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.MatrixParameter.Attributes;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
-using Microsoft.AspNetCore.WebUtilities;
 
-namespace Microsoft.AspNetCore.MatrixParameter
+namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders
 {
     public class MatrixParameterAttributeModelBinderProvider : IModelBinderProvider
     {
@@ -108,20 +108,9 @@ namespace Microsoft.AspNetCore.MatrixParameter
 
             static IEnumerable<string>? GetModelValues(string matrixParameterSegment, string matrixParameterName)
             {
-                var queryString = $"?{matrixParameterSegment.Replace(";", "&").Replace("+", "%2B")}";
-
-                var valuesCollection = QueryHelpers.ParseQuery(queryString);
-                if (!valuesCollection.TryGetValue(matrixParameterName, out var attributeValueList))
-                {
-                    return null;
-                }
-
-                if (attributeValueList.Count == 0)
-                {
-                    return null;
-                }
-                
-                return attributeValueList;
+                var valuesCollection =
+                    MatrixParametersPathHelper.GetMatrixParameter(matrixParameterSegment, matrixParameterName);
+                return valuesCollection?.Split(',');
             }
         }
     }
