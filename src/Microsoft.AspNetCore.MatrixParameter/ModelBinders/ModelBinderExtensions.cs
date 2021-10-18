@@ -23,13 +23,13 @@ namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders
                     return ConvertArrayValue(bindingContext, values);
                 }
             
-                var value = values.FirstOrDefault();
-                if (value is null)
+                var firstValue = values.FirstOrDefault();
+                if (firstValue is null)
                 {
                     return ModelBindingResult.Failed();
                 }
                 
-                return ConvertValue(bindingContext, value);
+                return ConvertValue(bindingContext, firstValue);
             }
             catch (Exception exc)
             {
@@ -38,12 +38,12 @@ namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders
             }
         }
 
-        private static void AddModelError(ModelBindingContext bindingContext, string modelName, Exception exc)
+        private static void AddModelError(ModelBindingContext bindingContext, string modelName, Exception exception)
         {
-            var targetInvocationException = exc as TargetInvocationException;
+            var targetInvocationException = exception as TargetInvocationException;
             if (targetInvocationException?.InnerException != null)
             {
-                exc = targetInvocationException.InnerException;
+                exception = targetInvocationException.InnerException;
             }
 
             // Don't add an error message if a binding error has already occurred for this property.
@@ -51,7 +51,7 @@ namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders
             var validationState = modelState.GetFieldValidationState(modelName);
             if (validationState == ModelValidationState.Unvalidated)
             {
-                modelState.AddModelError(modelName, exc, bindingContext.ModelMetadata);
+                modelState.AddModelError(modelName, exception, bindingContext.ModelMetadata);
             }
         }
 

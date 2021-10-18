@@ -85,7 +85,7 @@ namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders
                 parameterSegments.AddRange(segment.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries));
             }
 
-            var collectedAttributeValues = new List<string>();
+            var modelValuesCollection = new List<string>();
             foreach (string parameterSegment in parameterSegments)
             {
                 // If no parameter is specified, as [MatrixParameter], get values from all the segments.
@@ -99,11 +99,11 @@ namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders
                 var modelValues = GetModelValues(parameterSegment, modelName);
                 if (modelValues is not null)
                 {
-                    collectedAttributeValues.AddRange(modelValues);
+                    modelValuesCollection.AddRange(modelValues);
                 }
             }
 
-            bindingContext.Result = bindingContext.CreateResult(collectedAttributeValues);
+            bindingContext.Result = bindingContext.CreateResult(modelValuesCollection);
             return Task.CompletedTask;
 
             static IEnumerable<string>? GetModelValues(string matrixParameterSegment, string matrixParameterName)
