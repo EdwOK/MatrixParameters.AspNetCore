@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.MatrixParameter.Constraints;
 using Microsoft.AspNetCore.MatrixParameter.ModelBinders;
 using Microsoft.AspNetCore.MatrixParameter.Swagger;
 using Microsoft.Extensions.Configuration;

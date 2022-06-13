@@ -18,6 +18,15 @@ services.AddRouting(options =>
 });
 ```
 
+### Swagger
+```csharp
+services.AddSwaggerGen(c =>
+{
+    c.ParameterFilter<MatrixParameterFilter>();
+    c.DocumentFilter<MatrixDocumentFilter>();
+});
+```
+
 ### Controller
 ```csharp
 // GET customers/2/bananas;color=yellow,green;rate=good/oregon
