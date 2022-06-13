@@ -1,6 +1,6 @@
 ## MatrixParameters.AspNetCore
 
-[![Deploy Status](https://github.com/EdwOK/MatrixParameters.AspNetCore/.github/workflows/cicd.yml/badge.svg)](https://github.com/EdwOK/MatrixParameters.AspNetCore/.github/workflows/test-code.yml)
+[![Deploy Status](https://github.com/EdwOK/MatrixParameters.AspNetCore/.github/workflows/cicd.yml/badge.svg)](https://github.com/EdwOK/MatrixParameters.AspNetCore/.github/workflows/cicd.yml)
 [![NuGet](https://img.shields.io/nuget/v/MatrixParameters.AspNetCore.svg)](https://www.nuget.org/packages/MatrixParameters.AspNetCore)
 [![Downloads](https://img.shields.io/nuget/dt/MatrixParameters.AspNetCore.svg)](https://www.nuget.org/packages/MatrixParameters.AspNetCore/)
 
