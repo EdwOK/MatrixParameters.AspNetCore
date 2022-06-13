@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <AssemblyName>Microsoft.AspNetCore.MatrixParameter.Samples</AssemblyName>
+	<IsPackable>false</IsPackable>
+	<AssemblyName>Microsoft.AspNetCore.MatrixParameter.Samples</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
