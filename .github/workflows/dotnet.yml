@@ -24,4 +24,4 @@ jobs:
     - name: Pack
       run: dotnet pack --no-build --no-restore --verbosity minimal --output nupkgs --configuration Release
     - name: Release
-      run: dotnet nuget push nupkgs/*.nupkg --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY} --timeout 15
+      run: dotnet nuget push nupkgs/*.nupkg --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --timeout 15
