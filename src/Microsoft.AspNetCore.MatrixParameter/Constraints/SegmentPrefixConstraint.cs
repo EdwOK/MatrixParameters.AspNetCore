@@ -3,7 +3,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Microsoft.AspNetCore.MatrixParameter;
+namespace Microsoft.AspNetCore.MatrixParameter.Constraints;
 
 public class SegmentPrefixConstraint : IRouteConstraint
 {

@@ -22,12 +22,8 @@ public class MatrixParameterFilter : IParameterFilter
         if (matrixParameterAttribute is not null)
         {
             parameter.Style = ParameterStyle.Matrix;
-
-            if (!matrixParameterAttribute.Required)
-            {
-                parameter.AllowEmptyValue = true;
-                parameter.Required = false;
-            }
+            parameter.AllowEmptyValue = !matrixParameterAttribute.Required;
+            parameter.Required = matrixParameterAttribute.Required;
         }
     }
 }
