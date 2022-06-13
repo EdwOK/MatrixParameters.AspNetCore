@@ -10,10 +10,14 @@
 	<PackageTags>Microsoft;AspNet;AspNetCore;Model Binding; Matrix URI's; Matrix Parameters;</PackageTags>
 	<PackageDescription>A simple start to using matrix parameters (matrix uri's) in the action route of ASP.NET</PackageDescription>
 	<RepositoryUrl>https://github.com/EdwOK/MatrixParameters.AspNetCore</RepositoryUrl>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+	<None Include="../../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
