@@ -4,13 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
 	<IsPackable>true</IsPackable>
 	<PackageId>MatrixParameters.AspNetCore</PackageId>
-	<Version>1.0.1</Version>
+	<Version>1.0.2</Version>
 	<Authors>Edwok</Authors>
 	<Company>GitHub</Company>
 	<PackageTags>Microsoft;AspNet;AspNetCore;ModelBinding;Routes;Matrix URI's;Matrix Parameters;</PackageTags>
 	<PackageDescription>A simple start to using matrix parameters (matrix uri's) in the action route of ASP.NET</PackageDescription>
 	<RepositoryUrl>https://github.com/EdwOK/MatrixParameters.AspNetCore</RepositoryUrl>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,5 +20,6 @@
 
   <ItemGroup>
 	<None Include="../../README.md" Pack="true" PackagePath="\" />
+	<None Include="../../LICENSE" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>
