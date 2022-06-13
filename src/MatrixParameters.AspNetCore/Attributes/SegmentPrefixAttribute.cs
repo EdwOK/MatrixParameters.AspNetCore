@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Microsoft.AspNetCore.MatrixParameter.Attributes;
+namespace MatrixParameters.AspNetCore.Attributes;
 
 /// <summary>
 /// Used to bind the segment prefix value from the route.

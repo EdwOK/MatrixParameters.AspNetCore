@@ -1,11 +1,8 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.MatrixParameter.Attributes;
+using MatrixParameters.AspNetCore.Attributes;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders;
+namespace MatrixParameters.AspNetCore.ModelBinders;
 
 public class SegmentPrefixAttributeModelBinderProvider : IModelBinderProvider
 {

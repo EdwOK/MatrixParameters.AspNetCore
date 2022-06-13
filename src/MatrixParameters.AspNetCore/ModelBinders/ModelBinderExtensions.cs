@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders;
+namespace MatrixParameters.AspNetCore.ModelBinders;
 
 internal static class ModelBinderExtensions
 {

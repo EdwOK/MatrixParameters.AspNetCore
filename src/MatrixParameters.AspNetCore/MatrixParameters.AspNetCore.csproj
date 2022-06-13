@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
 	<IsPackable>true</IsPackable>
-	<PackageId>Microsoft.AspNetCore.MatrixParameter</PackageId>
+	<PackageId>MatrixParameters.AspNetCore</PackageId>
 	<Version>1.0.0</Version>
 	<Authors>Edwok</Authors>
 	<Company>GitHub</Company>
 	<PackageTags>Microsoft;AspNet;AspNetCore;Model Binding; Matrix URI's; Matrix Parameters;</PackageTags>
 	<PackageDescription>A simple start to using matrix parameters (matrix uri's) in the action route of ASP.NET</PackageDescription>
-	<RepositoryUrl>https://github.com/EdwOK/Microsoft.AspNetCore.MatrixParameter</RepositoryUrl>
+	<RepositoryUrl>https://github.com/EdwOK/MatrixParameters.AspNetCore</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

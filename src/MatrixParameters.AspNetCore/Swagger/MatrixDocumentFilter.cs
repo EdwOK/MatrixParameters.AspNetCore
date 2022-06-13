@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Microsoft.AspNetCore.MatrixParameter.Swagger;
+namespace MatrixParameters.AspNetCore.Swagger;
 
 public class MatrixDocumentFilter : IDocumentFilter
 {

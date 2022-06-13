@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace Microsoft.AspNetCore.MatrixParameter.Samples.Controllers;
+namespace MatrixParameters.AspNetCore.Samples.Controllers;
 
 public static class FruitsControllerResults
 {

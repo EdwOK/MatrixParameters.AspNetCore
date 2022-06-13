@@ -1,4 +1,4 @@
-## Microsoft.AspNetCore.MatrixParameter
+## MatrixParameters.AspNetCore
 
 This library helps you to start using [matrix parameters (or matrix URIs)](http://www.w3.org/DesignIssues/MatrixURIs.html) in the route of API action.
 

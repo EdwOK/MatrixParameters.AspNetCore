@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-	<IsPackable>false</IsPackable>
-	<AssemblyName>Microsoft.AspNetCore.MatrixParameter.Samples</AssemblyName>
+	  <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.AspNetCore.MatrixParameter\Microsoft.AspNetCore.MatrixParameter.csproj" />
+    <ProjectReference Include="..\MatrixParameters.AspNetCore\MatrixParameters.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>

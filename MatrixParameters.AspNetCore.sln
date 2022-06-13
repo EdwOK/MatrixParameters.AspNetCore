@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.MatrixParameter.Samples", "src\Microsoft.AspNetCore.MatrixParameter.Samples\Microsoft.AspNetCore.MatrixParameter.Samples.csproj", "{1C926A43-9575-4E3E-88F4-9CFA6573ECB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatrixParameters.AspNetCore.Samples", "src\MatrixParameters.AspNetCore.Samples\MatrixParameters.AspNetCore.Samples.csproj", "{1C926A43-9575-4E3E-88F4-9CFA6573ECB0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{62925625-0400-4C5D-A6E0-730AA215B083}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.MatrixParameter", "src\Microsoft.AspNetCore.MatrixParameter\Microsoft.AspNetCore.MatrixParameter.csproj", "{9C43869D-1980-4408-A95B-5DE0FD7AF905}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatrixParameters.AspNetCore", "src\MatrixParameters.AspNetCore\MatrixParameters.AspNetCore.csproj", "{9C43869D-1980-4408-A95B-5DE0FD7AF905}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.MatrixParameter.Tests", "test\Microsoft.AspNetCore.MatrixParameter.Tests\Microsoft.AspNetCore.MatrixParameter.Tests.csproj", "{F79D8794-0EE4-4E30-A1D4-3617E22F72EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatrixParameters.AspNetCore.Tests", "test\MatrixParameters.AspNetCore.Tests\MatrixParameters.AspNetCore.Tests.csproj", "{F79D8794-0EE4-4E30-A1D4-3617E22F72EE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8BD7BAE4-608A-4514-A978-0562F2AC3F0F}"
 EndProject

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNetCore.MatrixParameter.Attributes;
+﻿using System.Web;
+using MatrixParameters.AspNetCore.Attributes;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders;
+namespace MatrixParameters.AspNetCore.ModelBinders;
 
 public class MatrixParameterAttributeModelBinderProvider : IModelBinderProvider
 {

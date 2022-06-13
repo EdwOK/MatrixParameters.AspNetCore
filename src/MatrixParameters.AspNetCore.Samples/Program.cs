@@ -1,5 +1,4 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.MatrixParameter.Samples;
+using MatrixParameters.AspNetCore.Samples;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,4 +10,7 @@ startup.Configure(app, app.Environment);
 
 app.Run();
 
-public partial class Program { }
+namespace MatrixParameters.AspNetCore.Samples
+{
+    public partial class Program { }
+}

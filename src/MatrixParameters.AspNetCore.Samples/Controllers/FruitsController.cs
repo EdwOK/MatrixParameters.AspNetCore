@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.MatrixParameter.Attributes;
+﻿using MatrixParameters.AspNetCore.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Microsoft.AspNetCore.MatrixParameter.Samples.Controllers;
+namespace MatrixParameters.AspNetCore.Samples.Controllers;
 
 [ApiController]
 [Route("customers/{customerId}")]

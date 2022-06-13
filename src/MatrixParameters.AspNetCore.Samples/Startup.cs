@@ -1,14 +1,9 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.MatrixParameter.Constraints;
-using Microsoft.AspNetCore.MatrixParameter.ModelBinders;
-using Microsoft.AspNetCore.MatrixParameter.Swagger;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using MatrixParameters.AspNetCore.Constraints;
+using MatrixParameters.AspNetCore.ModelBinders;
+using MatrixParameters.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
 
-namespace Microsoft.AspNetCore.MatrixParameter.Samples;
+namespace MatrixParameters.AspNetCore.Samples;
 
 public class Startup
 {

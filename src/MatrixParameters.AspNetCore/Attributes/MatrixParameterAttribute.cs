@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Microsoft.AspNetCore.MatrixParameter.Attributes;
+namespace MatrixParameters.AspNetCore.Attributes;
 
 /// <summary>
 /// Used to bind matrix parameter values from the URI.

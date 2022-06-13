@@ -1,17 +1,15 @@
-using System.Collections.Generic;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.MatrixParameter.Samples.Controllers;
+using MatrixParameters.AspNetCore.Samples;
+using MatrixParameters.AspNetCore.Samples.Controllers;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
-namespace Microsoft.AspNetCore.MatrixParameter.Tests;
+namespace MatrixParameters.AspNetCore.Tests;
 
-public class FruitsControllerTests : IClassFixture<WebApplicationFactory<Samples.Startup>>
+public class FruitsControllerTests : IClassFixture<WebApplicationFactory<Startup>>
 {
-    private readonly WebApplicationFactory<Samples.Startup> _factory;
+    private readonly WebApplicationFactory<Startup> _factory;
 
-    public FruitsControllerTests(WebApplicationFactory<Samples.Startup> factory) => _factory = factory;
+    public FruitsControllerTests(WebApplicationFactory<Startup> factory) => _factory = factory;
 
     [Theory]
     [InlineData("bananas", new[] { "yellow", "green" }, "oregon", new[] { "good" }, "customers/2/bananas;color=yellow,green;rate=good/oregon")]

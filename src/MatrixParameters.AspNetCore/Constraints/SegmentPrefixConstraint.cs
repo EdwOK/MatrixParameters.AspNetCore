@@ -1,9 +1,8 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Microsoft.AspNetCore.MatrixParameter.Constraints;
+namespace MatrixParameters.AspNetCore.Constraints;
 
 public class SegmentPrefixConstraint : IRouteConstraint
 {

@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.MatrixParameter.Attributes;
+﻿using MatrixParameters.AspNetCore.Attributes;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Microsoft.AspNetCore.MatrixParameter.Swagger;
+namespace MatrixParameters.AspNetCore.Swagger;
 
 public class MatrixParameterFilter : IParameterFilter
 {
