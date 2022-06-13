@@ -1,5 +1,9 @@
 ## MatrixParameters.AspNetCore
 
+[![NuGet](https://img.shields.io/nuget/v/MatrixParameters.AspNetCore.svg)](https://www.nuget.org/packages/MatrixParameters.AspNetCore)
+[![NuGet Pre-release](https://img.shields.io/nuget/vpre/MatrixParameters.AspNetCore.svg)](https://www.nuget.org/packages/MatrixParameters.AspNetCore)
+[![Downloads](https://img.shields.io/nuget/dt/MatrixParameters.AspNetCore.svg)](https://www.nuget.org/packages/MatrixParameters.AspNetCore/)
+
 This library helps you to start using [matrix parameters (or matrix URIs)](http://www.w3.org/DesignIssues/MatrixURIs.html) in the route of API action.
 
 ## Code Example
