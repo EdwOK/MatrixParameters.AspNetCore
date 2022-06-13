@@ -5,58 +5,53 @@ using Microsoft.AspNetCore.MatrixParameter.Attributes;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders
+namespace Microsoft.AspNetCore.MatrixParameter.ModelBinders;
+
+public class SegmentPrefixAttributeModelBinderProvider : IModelBinderProvider
 {
-    public class SegmentPrefixAttributeModelBinderProvider : IModelBinderProvider
+    public IModelBinder? GetBinder(ModelBinderProviderContext context)
     {
-        public IModelBinder? GetBinder(ModelBinderProviderContext context)
+        ArgumentNullException.ThrowIfNull(context);
+
+        if (context.Metadata is not DefaultModelMetadata metadata)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (context.Metadata is not DefaultModelMetadata metadata)
-            {
-                return null;
-            }
-
-            if (metadata.Attributes.Attributes.All(a => a.GetType() != typeof(SegmentPrefixAttribute)))
-            {
-                return null;
-            }
-
-            return new SegmentPrefixAttributeModelBinder();
+            return null;
         }
-    }
-    
-    public class SegmentPrefixAttributeModelBinder : IModelBinder
-    {
-        public Task BindModelAsync(ModelBindingContext bindingContext)
+
+        if (metadata.Attributes.Attributes.All(a => a.GetType() != typeof(SegmentPrefixAttribute)))
         {
-            if (bindingContext is null)
-            {
-                throw new ArgumentNullException(nameof(bindingContext));
-            }
+            return null;
+        }
 
-            var segmentName = bindingContext.ModelName;
+        return new SegmentPrefixAttributeModelBinder();
+    }
+}
+    
+public class SegmentPrefixAttributeModelBinder : IModelBinder
+{
+    private const string KeyDelimiter = ";";
 
-            var segmentResult = bindingContext.ValueProvider.GetValue(segmentName);
-            if (segmentResult == ValueProviderResult.None)
-            {
-                return Task.CompletedTask;
-            }
+    public Task BindModelAsync(ModelBindingContext bindingContext)
+    {
+        ArgumentNullException.ThrowIfNull(bindingContext);
 
-            var segmentValue = segmentResult.FirstValue;
-            if (segmentValue is null)
-            {
-                return Task.CompletedTask;
-            }
+        var segmentName = bindingContext.ModelName;
 
-            var value = segmentValue.Split(new[] { ";" }, 2, StringSplitOptions.None).First();
-            bindingContext.Result = bindingContext.CreateResult(new []{ value });
-
+        var segmentResult = bindingContext.ValueProvider.GetValue(segmentName);
+        if (segmentResult == ValueProviderResult.None)
+        {
             return Task.CompletedTask;
         }
+
+        var segmentValue = segmentResult.FirstValue;
+        if (segmentValue is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        var value = segmentValue.Split(new[] { KeyDelimiter }, 2, StringSplitOptions.None).First();
+        bindingContext.Result = bindingContext.CreateResult(new[] { value });
+
+        return Task.CompletedTask;
     }
 }
