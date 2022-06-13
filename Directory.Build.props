@@ -3,5 +3,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 </Project>
