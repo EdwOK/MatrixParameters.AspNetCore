@@ -14,4 +14,4 @@ updates:
     directory: "/"
     schedule:
       # Check for updates managed by Composer once a week
-      interval: "weekly"
+      interval: "daily"
