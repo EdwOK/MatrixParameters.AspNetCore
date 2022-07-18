@@ -1,13 +1,11 @@
-name: cicd
+name: ci
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
 jobs:
-  build_and_deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -23,6 +21,3 @@ jobs:
       run: dotnet test --no-build --verbosity normal --configuration Release
     - name: Pack
       run: dotnet pack --no-build --no-restore --verbosity minimal --output nupkgs --configuration Release
-    - name: Release
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-      run: dotnet nuget push nupkgs/*.nupkg --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --timeout 15
