@@ -1,7 +1,7 @@
 ## MatrixParameters.AspNetCore
 
 [![CodeQL](https://github.com/EdwOK/MatrixParameters.AspNetCore/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/EdwOK/MatrixParameters.AspNetCore/actions/workflows/codeql-analysis.yml)
-[![Deploy](https://github.com/EdwOK/MatrixParameters.AspNetCore/actions/workflows/cicd.yml/badge.svg)](https://github.com/EdwOK/MatrixParameters.AspNetCore/actions/workflows/cicd.yml)
+[![Deploy](https://github.com/EdwOK/MatrixParameters.AspNetCore/actions/workflows/ci.yml/badge.svg)](https://github.com/EdwOK/MatrixParameters.AspNetCore/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/MatrixParameters.AspNetCore.svg)](https://www.nuget.org/packages/MatrixParameters.AspNetCore)
 [![Downloads](https://img.shields.io/nuget/dt/MatrixParameters.AspNetCore.svg)](https://www.nuget.org/packages/MatrixParameters.AspNetCore/)
 
